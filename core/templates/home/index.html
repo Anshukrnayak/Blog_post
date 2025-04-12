@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+        <p>Welcome, {{ user.username }}!</p>
+        <a href="{% url 'post' %}">Create Post</a> |
+        <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+        <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+
+    <h2>Your Posts</h2>
+    {% for blog in blogs %}
+        <h3>{{ blog.title }}</h3>
+        <p>{{ blog.content }}</p>
+        <p>Posted on {{ blog.created_at }}</p>
+        <a href="{% url 'update_post' blog.id %}">Edit</a>
+        <a href="{% url 'delete_post' blog.id %}">Delete</a>
+        <hr>
+    {% empty %}
+        <p>No posts yet. <a href="{% url 'post' %}">Create one</a>!</p>
+    {% endfor %}
+
+    <!-- Pagination -->
+    {% if is_paginated %}
+        <div>
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+            {% endif %}
+            <span>Page {{ page_obj.number }} of {{ paginator.num_pages }}</span>
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">Next</a>
+            {% endif %}
+        </div>
+    {% endif %}
+
+{% endblock %}
+

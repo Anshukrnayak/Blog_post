@@ -2,6 +2,7 @@
 # Simple Blog post appliction using reactjs and django rest framework 
 0 create new virtual enviroment.
 1 backend model. 
+1.5 CRUD in views 
 2 serializers blogPost model.
 3 create view of blog post. 
 4 CRUD operation. 
