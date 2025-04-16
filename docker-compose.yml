@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  db:
+    image: mysql  # Use the official PostgreSQL image
+    environment:     # Optional: Set environment variables for PostgreSQL
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: #include
+  web:
+    build: .
+    volumes:
+      - .:/Blogs
+    ports:
+      - "8000:8000"
